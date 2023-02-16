@@ -260,7 +260,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 4.393448
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -284,8 +284,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.39640152, y: -3.4941063, z: -17.928608}
+  m_LocalScale: {x: 1.7928607, y: 1.7928607, z: 1.7928607}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1937695465}
@@ -650,9 +650,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105392983}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3385274, y: -1.5321574, z: 0.022915885}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.0033917, y: -6.563766, z: 0.04108499}
+  m_LocalScale: {x: 1.7928607, y: 1.7928607, z: 1.7928607}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1103690750}
@@ -667,7 +667,7 @@ Transform:
   - {fileID: 591226801}
   - {fileID: 1507603046}
   - {fileID: 913785209}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1937695465}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302397471
@@ -1154,7 +1154,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Time: 5
+  m_Time: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -1271,11 +1271,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937695462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2211, y: 2.1289, z: 0}
+  m_LocalScale: {x: 0.5577678, y: 0.5577678, z: 0.5577678}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 1105392984}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1315,10 +1316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementDirection: {x: 1, y: 1}
-  maxVerticalSpeed: 10
-  maxHorizontalSpeed: 10
+  maxVerticalSpeed: -100
+  maxHorizontalSpeed: 90
   inputController: {fileID: 1937695466}
-  currentSpeed: 1
+  currentSpeed: 10
 --- !u!50 &1937695468
 Rigidbody2D:
   serializedVersion: 4

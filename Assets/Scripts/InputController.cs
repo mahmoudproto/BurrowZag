@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InputController : MonoBehaviour
 {
     // Mouse Events
-    public UnityEngine.Events.UnityEvent<int> onDirectionChange;
-    public UnityEngine.Events.UnityEvent onMouseDown;
-    public UnityEngine.Events.UnityEvent onMouseUp;
+    public static event Action<int> onDirectionChange;
+    public static event Action onMouseDown;
+    public static event Action onMouseUp;
     
 
     // direction and changing threshold
@@ -28,9 +29,9 @@ public class InputController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             initPosition = Input.mousePosition;
-            onMouseDown.Invoke();
+            onMouseDown?.Invoke();
         }
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             currentPosition = Input.mousePosition;
             delta = currentPosition - initPosition;
@@ -38,18 +39,20 @@ public class InputController : MonoBehaviour
             if (delta.x > threshold)
             {
                 direction = 1;
+                onDirectionChange?.Invoke(direction);
             }
 
             if (delta.x < -1 * threshold)
             {
                 direction = -1;
+                onDirectionChange?.Invoke(direction);
             }
 
-            onDirectionChange.Invoke(direction);
         }
         if (Input.GetMouseButtonUp(0))
         {
-            onMouseUp.Invoke();
+            onMouseUp?.Invoke();
+            onDirectionChange?.Invoke(0);
         }
 
 

@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EventsTest : MonoBehaviour
 {
-    public delegate void weakpoint_Hit();
-    public static event weakpoint_Hit weakpoint_Hit_event;
-
-    public delegate void release();
-    public static event release onRelease_event;
-
-    public delegate void Hold();
-    public static event Hold onHold_event;
+    public static event Action weakpoint_Hit_event;
+    public static event Action onRelease_event;
+    public static event Action onHold_event;
 
 
     [ContextMenu("Weakpoint_Hit_event")]
@@ -31,8 +27,7 @@ public class EventsTest : MonoBehaviour
     [ContextMenu("Hold_event")]
     public void OnHold_event()
     {
-        if (onHold_event != null)
-            onHold_event.Invoke();
+        onHold_event?.Invoke();
     }
 
 }

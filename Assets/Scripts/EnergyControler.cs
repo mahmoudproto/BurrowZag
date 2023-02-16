@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnergyControler : MonoBehaviour
 {
-    int current_energy;
+    float current_energy;
     public int max_energy;
     public Slider EnergySlider;
     [Header("Bonus Percentages %")]
@@ -16,7 +16,8 @@ public class EnergyControler : MonoBehaviour
 
     [Header("Consume Energy Percentage %")]
     [Space(5)]
-    public int Penetrate_cost;
+    public float Penetrate_cost;
+    public float consumbtion_rate;
     //public Dictionary<EnergyBonusType, int> EnergyBonusVAlue;
 
     private void Start()
@@ -25,9 +26,9 @@ public class EnergyControler : MonoBehaviour
         EnergySlider.maxValue = max_energy;
         EnergySlider.value = max_energy;
         current_energy = max_energy;
-        EventsTest.weakpoint_Hit_event += ()=>AddEnergy(weakpoint_bonus);
-        EventsTest.onRelease_event += DecreaseEnergy;
-        EventsTest.onHold_event += () => CancelInvoke();
+        EventsTest.weakpoint_Hit_event += () => AddEnergy(weakpoint_bonus);
+        InputController.onMouseUp += DecreaseEnergy;
+        InputController.onMouseDown += () => CancelInvoke();
     }
 
     void AddEnergy(int bonus)
@@ -44,7 +45,7 @@ public class EnergyControler : MonoBehaviour
             Debug.Log("Not Enough Energy to Penetrate");
             return;
         }
-        InvokeRepeating("DecreaseEnergyEverySecound", 0, 1f);
+        InvokeRepeating("DecreaseEnergyEverySecound", 0, consumbtion_rate);
     }
     void DecreaseEnergyEverySecound()
     {
