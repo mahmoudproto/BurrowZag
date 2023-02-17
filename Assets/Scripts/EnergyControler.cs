@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,11 +19,10 @@ public class EnergyControler : MonoBehaviour
     [Space(5)]
     public float Penetrate_cost;
     public float consumbtion_rate;
-    //public Dictionary<EnergyBonusType, int> EnergyBonusVAlue;
 
+    public static event Action<bool> onEnergysufficiencyChange;
     private void Start()
     {
-        //EnergyBonusVAlue.Add(EnergyBonusType.weakpoint,5);
         EnergySlider.maxValue = max_energy;
         EnergySlider.value = max_energy;
         current_energy = max_energy;
@@ -34,15 +34,18 @@ public class EnergyControler : MonoBehaviour
     void AddEnergy(int bonus)
     {
         current_energy += (max_energy * bonus / 100);
+        EnergySlider.value = current_energy;
         if (current_energy > max_energy)
             current_energy = max_energy;
+        if (current_energy >= Penetrate_cost)
+            onEnergysufficiencyChange?.Invoke(true);
     }
 
     void DecreaseEnergy()
     {
         if (current_energy < (Penetrate_cost * max_energy / 100))
         {
-            Debug.Log("Not Enough Energy to Penetrate");
+            onEnergysufficiencyChange?.Invoke(false);
             return;
         }
         InvokeRepeating("DecreaseEnergyEverySecound", 0, consumbtion_rate);
@@ -51,6 +54,7 @@ public class EnergyControler : MonoBehaviour
     {
         if (current_energy < (Penetrate_cost * max_energy / 100))
         {
+            onEnergysufficiencyChange?.Invoke(false);
             CancelInvoke();
             return;
         }

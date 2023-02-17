@@ -12,10 +12,10 @@ public class InputController : MonoBehaviour
     
 
     // direction and changing threshold
-    [SerializeField] int direction = 0;
+    [SerializeField] int direction;
     public int Direction { private set { direction = value; } get { return direction; } }
     [SerializeField] float threshold = 0.5f;
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -23,7 +23,7 @@ public class InputController : MonoBehaviour
     Vector2 initPosition;
     Vector2 currentPosition;
     Vector2 delta;
-    // Update is called once per frame
+
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -52,7 +52,6 @@ public class InputController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             onMouseUp?.Invoke();
-            onDirectionChange?.Invoke(0);
         }
 
 
