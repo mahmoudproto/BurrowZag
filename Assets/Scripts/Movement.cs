@@ -41,14 +41,13 @@ public class Movement : MonoBehaviour
             movementDirection.x = 0;
         else
             movementDirection.x = lastDiriction;
-
     }
 
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
-            OnMouseUpHandler();
+            OnMouseDownHandler();
     }
     private void OnDestroy()
     {

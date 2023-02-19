@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnergyControler : MonoBehaviour
 {
@@ -29,6 +30,15 @@ public class EnergyControler : MonoBehaviour
         EventsTest.weakpoint_Hit_event += () => AddEnergy(weakpoint_bonus);
         InputController.onMouseUp += DecreaseEnergy;
         InputController.onMouseDown += () => CancelInvoke();
+    }
+
+    private float deltaTime;
+    [SerializeField] TMPro.TMP_Text FPS_text;
+    private void Update()
+    {
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();
     }
 
     void AddEnergy(int bonus)
