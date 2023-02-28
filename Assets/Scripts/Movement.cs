@@ -23,7 +23,10 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        rigidbody2D.velocity = movementDirection.normalized * currentSpeed;
+        if (!InputController.gamePaused)
+            rigidbody2D.velocity = movementDirection.normalized * currentSpeed;
+        else
+            rigidbody2D.velocity = Vector2.zero;
     }
     void OnMouseDownHandler()
     {
@@ -42,7 +45,6 @@ public class Movement : MonoBehaviour
         else
             movementDirection.x = lastDiriction;
     }
-
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
         this.isEnergySufficent = isSufficent;

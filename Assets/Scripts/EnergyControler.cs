@@ -27,9 +27,14 @@ public class EnergyControler : MonoBehaviour
         EnergySlider.maxValue = max_energy;
         EnergySlider.value = max_energy;
         current_energy = max_energy;
-        EventsTest.weakpoint_Hit_event += () => AddEnergy(weakpoint_bonus);
+        EventsTest.weakpoint_Hit_event += AddEnergyHandler;
         InputController.onMouseUp += DecreaseEnergy;
-        InputController.onMouseDown += () => CancelInvoke();
+        InputController.onMouseDown += OnHoldHandler;
+    }
+
+    private void OnHoldHandler()
+    {
+       CancelInvoke();
     }
 
     private float deltaTime;
@@ -41,9 +46,9 @@ public class EnergyControler : MonoBehaviour
         FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();
     }
 
-    void AddEnergy(int bonus)
+    void AddEnergyHandler()
     {
-        current_energy += (max_energy * bonus / 100);
+        current_energy += (max_energy * weakpoint_bonus / 100);
         EnergySlider.value = current_energy;
         if (current_energy > max_energy)
             current_energy = max_energy;
@@ -72,12 +77,11 @@ public class EnergyControler : MonoBehaviour
         EnergySlider.value = current_energy;
     }
 
-}
+    private void OnDestroy()
+    {
+        EventsTest.weakpoint_Hit_event -= AddEnergyHandler;
+        InputController.onMouseUp -= DecreaseEnergy;
+        InputController.onMouseDown -= OnHoldHandler;
+    }
 
-
-public enum EnergyBonusType
-{
-    extra_life,
-    weakpoint,
-    MaxComboWP
 }

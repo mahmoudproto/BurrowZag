@@ -9,8 +9,9 @@ public class InputController : MonoBehaviour
     public static event Action<int> onDirectionChange;
     public static event Action onMouseDown;
     public static event Action onMouseUp;
-    
 
+
+    public static bool gamePaused = true;
     // direction and changing threshold
     [SerializeField] int direction;
     public int Direction { private set { direction = value; } get { return direction; } }
@@ -30,6 +31,7 @@ public class InputController : MonoBehaviour
         {
             initPosition = Input.mousePosition;
             onMouseDown?.Invoke();
+            gamePaused = false;
         }
         if (Input.GetMouseButton(0))
         {
@@ -53,8 +55,6 @@ public class InputController : MonoBehaviour
         {
             onMouseUp?.Invoke();
         }
-
-
 
 
         //print(Input.touchCount);
