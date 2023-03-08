@@ -43,7 +43,8 @@ public class EnergyControler : MonoBehaviour
     {
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
-        FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();
+        //Application.targetFrameRate = 60;
+        FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();// + "\nTarget = " + Application.targetFrameRate;
     }
 
     void AddEnergyHandler()
