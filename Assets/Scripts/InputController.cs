@@ -11,7 +11,6 @@ public class InputController : MonoBehaviour
     public static event Action onMouseUp;
 
 
-    public static bool gamePaused = true;
     // direction and changing threshold
     [SerializeField] int direction;
     public int Direction { private set { direction = value; } get { return direction; } }
@@ -19,7 +18,7 @@ public class InputController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
     Vector2 initPosition;
     Vector2 currentPosition;
@@ -27,11 +26,11 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             initPosition = Input.mousePosition;
             onMouseDown?.Invoke();
-            gamePaused = false;
+            GameManager.instance.ResumeGame();
         }
         if (Input.GetMouseButton(0))
         {

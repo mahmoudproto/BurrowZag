@@ -12,9 +12,10 @@ public class Movement : MonoBehaviour
     private int lastDiriction=1;
     private bool isEnergySufficent=true;
 
-    void Start()
+    void OnEnable()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        GameManager.instance.playerTransform = this.transform;
         InputController.onDirectionChange += OnDirictionChangeHandler;
         InputController.onMouseDown += OnMouseDownHandler; 
         InputController.onMouseUp += OnMouseUpHandler;
@@ -23,7 +24,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (!InputController.gamePaused)
+        if (!GameManager.instance.GamePaused)
             rigidbody2D.velocity = movementDirection.normalized * currentSpeed;
         else
             rigidbody2D.velocity = Vector2.zero;
