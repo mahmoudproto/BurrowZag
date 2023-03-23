@@ -6,7 +6,6 @@ public class SetTargetFPS : MonoBehaviour
 {
     private void Awake()
     {
-        Debug.Log("Target = 60 fps");
         Application.targetFrameRate = 999;
     }
 }

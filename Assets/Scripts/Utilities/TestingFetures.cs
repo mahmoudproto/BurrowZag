@@ -20,7 +20,14 @@ public class TestingFetures : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InputController.gamePaused = !InputController.gamePaused;
+            if (GameManager.instance.GamePaused)
+            {
+                GameManager.instance.ResumeGame();
+            }
+            else
+            {
+                GameManager.instance.PauseGame();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.R))
