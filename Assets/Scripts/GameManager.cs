@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public bool GamePaused => gamePaused;
     private bool gamePaused;
+    [HideInInspector]
     public Transform playerTransform;
     public static event Action gamePausedEvent;
     public static event Action gameResumedEvent;
