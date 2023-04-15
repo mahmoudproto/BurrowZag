@@ -1033,7 +1033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4035162436559464126}
   m_Layer: 0
-  m_Name: Hazards Row easy
+  m_Name: double left and right Hazards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
