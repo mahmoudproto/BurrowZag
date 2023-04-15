@@ -20,7 +20,7 @@ public class TestingFetures : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (GameManager.instance.GamePaused)
+            if (GameManager.instance.GameisPaused)
             {
                 GameManager.instance.ResumeGame();
             }

@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] Vector2 movementDirection=Vector2.one;
-    [SerializeField] float currentSpeed=1f;
+    [SerializeField] float initialSpeed;
 
+    float currentSpeed;
     new Rigidbody2D rigidbody2D;
+    Vector2 movementDirection=new Vector2(-1,-1);
     private int lastDiriction=1;
     private bool isEnergySufficent=true;
 
     void OnEnable()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = this.GetComponent<Rigidbody2D>();
         GameManager.instance.playerTransform = this.transform;
+        currentSpeed = initialSpeed;
+
         InputController.onDirectionChange += OnDirictionChangeHandler;
-        InputController.onMouseDown += OnMouseDownHandler; 
+        InputController.onMouseDown += OnMouseDownHandler;
         InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
     }
 
     void Update()
     {
-        if (!GameManager.instance.GamePaused)
+        if (!GameManager.instance.GameisPaused)
             rigidbody2D.velocity = movementDirection.normalized * currentSpeed;
         else
             rigidbody2D.velocity = Vector2.zero;
