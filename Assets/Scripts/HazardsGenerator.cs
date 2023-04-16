@@ -14,8 +14,8 @@ public class HazardsGenerator : MonoBehaviour
     private void Start()
     {
         hazardsContainer = new GameObject("Hazards Container");
-        GameManager.gameResumedEvent += OnGameResumeHandler;
-        GameManager.gamePausedEvent += OnGamePausedHandler;
+        GameManager.onGameResumed += OnGameResumeHandler;
+        GameManager.onGamePaused += OnGamePausedHandler;
     }
 
     private void OnGamePausedHandler()
@@ -52,7 +52,7 @@ public class HazardsGenerator : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.gameResumedEvent -= OnGameResumeHandler;
-        GameManager.gamePausedEvent -= OnGamePausedHandler;
+        GameManager.onGameResumed -= OnGameResumeHandler;
+        GameManager.onGamePaused -= OnGamePausedHandler;
     }
 }

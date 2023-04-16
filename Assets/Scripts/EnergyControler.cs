@@ -30,7 +30,7 @@ public class EnergyControler : MonoBehaviour
         EventsTest.weakpoint_Hit_event += AddEnergyHandler;
         InputController.onMouseUp += DecreaseEnergy;
         InputController.onMouseDown += OnHoldHandler;
-        GameManager.gamePausedEvent += OnGamePausedHandler;
+        GameManager.onGamePaused += OnGamePausedHandler;
     }
 
     private void OnGamePausedHandler()
@@ -89,7 +89,7 @@ public class EnergyControler : MonoBehaviour
         EventsTest.weakpoint_Hit_event -= AddEnergyHandler;
         InputController.onMouseUp -= DecreaseEnergy;
         InputController.onMouseDown -= OnHoldHandler;
-        GameManager.gamePausedEvent -= OnGamePausedHandler;
+        GameManager.onGamePaused -= OnGamePausedHandler;
     }
 
 }
