@@ -23,8 +23,8 @@ public class Movement : MonoBehaviour
         InputController.onMouseDown += OnMouseDownHandler;
         InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
+        GameManager.onStageChangeEvent += OnStageChangeHandler;
     }
-
     void Update()
     {
         if (!GameManager.instance.GameisPaused)
@@ -54,6 +54,10 @@ public class Movement : MonoBehaviour
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
             OnMouseDownHandler();
+    }
+    private void OnStageChangeHandler(StageInformations stage)
+    {
+        currentSpeed = initialSpeed * stage.speed_multiplier;
     }
     private void OnDestroy()
     {
