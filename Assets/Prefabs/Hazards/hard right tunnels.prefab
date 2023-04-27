@@ -1675,7 +1675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9023618456053699214}
   m_Layer: 0
-  m_Name: right tunnels
+  m_Name: hard right tunnels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
