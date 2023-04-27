@@ -8,7 +8,8 @@ public class CollisionDetection : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hazards"))
         {
-            VibratorController.Instance.Vibrate(0.25f);
+            //VibratorController.Instance.Vibrate();
+            VibratorController.Instance.Vibrate(.25f,255);
             //long[] pattern = { 0, 100, 500, 1000, 500, 200, 100 };
             //VibratorController.Instance.Vibrate(pattern, -1);
             GameManager.instance.PlayerHitHazard();
