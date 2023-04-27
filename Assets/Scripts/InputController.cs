@@ -30,7 +30,6 @@ public class InputController : MonoBehaviour
         {
             initPosition = Input.mousePosition;
             onMouseDown?.Invoke();
-            GameManager.instance.ResumeGame();
         }
         if (Input.GetMouseButton(0))
         {

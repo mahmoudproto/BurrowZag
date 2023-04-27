@@ -379,7 +379,6 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   score_text: {fileID: 226587214}
-  score: 0
   playerTransform: {fileID: 0}
 --- !u!114 &36149469
 MonoBehaviour:
@@ -399,7 +398,6 @@ MonoBehaviour:
   - {fileID: 3305216912851221505, guid: 5cde1bfffa5532d4fae6fbe8c92d735d, type: 3}
   - {fileID: 7990398072011594442, guid: f30eacff068c6224cb9317214a3351a5, type: 3}
   - {fileID: 5424338810375634085, guid: 469307cf04f979f4d88251edaa008c8f, type: 3}
-  - {fileID: 9023618456053699213, guid: a1dd4411de54e4f4586b1c97a2c76c71, type: 3}
   - {fileID: 7043956176324706329, guid: bb41a28cc6a475442afa5d3cbc68d6f3, type: 3}
   mediumHazards: []
   hardHazards: []

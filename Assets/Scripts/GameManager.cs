@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private StageInformations[] stagesInfo;
 
     [SerializeField] TMPro.TMP_Text score_text;
-    public float score = 0;
+    private float score = 0;
     Coroutine ScoreandTimeCoroutine;
 
     [HideInInspector] public Transform playerTransform;
@@ -22,13 +21,19 @@ public class GameManager : MonoBehaviour
 
     public static event Action onGamePaused;
     public static event Action onGameResumed;
+    public static event Action<float> onGameOver;
     public static event Action<StageInformations> onStageChangeEvent;
     private void Awake()
     {
         if (instance == null)
             instance = this;
         gamePaused = true;
+    }
+
+    public void intialzeNewRun()
+    {
         StartStagesCoroutines();
+        ResumeGame();
     }
 
     private void StartStagesCoroutines()
@@ -83,7 +88,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerHitHazard()
     {
-        SceneManager.LoadScene(0);
+        PauseGame();
+        onGameOver?.Invoke(score);
     }
 }
 [Serializable]
