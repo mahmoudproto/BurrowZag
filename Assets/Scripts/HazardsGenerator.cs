@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HazardsGenerator : MonoBehaviour
 {
+    [SerializeField] private bool testingNewHazzard;
+    [SerializeField] private GameObject newHazzard;
+    [Space(10)]
     public List<GameObject> easyHazards, mediumHazards, hardHazards;
     [Space(10)]
     public float minInterval, maxInterval;
@@ -11,6 +14,7 @@ public class HazardsGenerator : MonoBehaviour
     private GameObject hazardsContainer;
     float TimePassedSenseLastHazard;
     Coroutine IncrementTimerCoroutine;
+ 
     private void Start()
     {
         hazardsContainer = new GameObject("Hazards Container");
@@ -31,6 +35,8 @@ public class HazardsGenerator : MonoBehaviour
     void GenerateNewHazard()
     {
         GameObject randomHazard = easyHazards[Random.Range(0, easyHazards.Count)];
+        if (testingNewHazzard)
+            randomHazard = newHazzard;
         Vector3 hazardPosition = GameManager.instance.playerTransform.position + randomHazard.transform.position;
         GameObject.Instantiate(randomHazard, hazardPosition, Quaternion.identity, hazardsContainer.transform);
         currentRandomInterval = Random.Range(minInterval, maxInterval + 1);
