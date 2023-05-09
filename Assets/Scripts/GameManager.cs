@@ -23,17 +23,19 @@ public class GameManager : MonoBehaviour
     public static event Action onGameResumed;
     public static event Action<float> onGameOver;
     public static event Action<StageInformations> onStageChangeEvent;
-    public static event Action energyPack_Hit_Event;
+    public static event Action<float> OnEnergyPackHit;
     private void Awake()
     {
         if (instance == null)
             instance = this;
+        else 
+            Destroy(this);
         gamePaused = true;
     }
 
-    public void Fire_EnergyPack_Hit_event()
+    public void Fire_EnergyPack_Hit_event(float energy)
     {
-        energyPack_Hit_Event?.Invoke();
+        OnEnergyPackHit?.Invoke(energy);
     }
 
     public void intialzeNewRun()
