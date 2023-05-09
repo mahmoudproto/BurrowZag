@@ -29,7 +29,9 @@ public class CollectibleRandomizer : MonoBehaviour
         int selected = Random.Range(0, collectablesInArea.Length);
         for(int i=0;i<collectablesInArea.Length;i++)
         {
-            collectablesInArea[i].gameObject.SetActive(selected == i ? true : false);//if selected == i setActive=true, else false
+            //if selected == i setActive=true, else false
+            collectablesInArea[i].gameObject.SetActive(selected == i ? true : false);
+
             collectablesInArea[i].GetComponent<SpriteRenderer>().enabled = true;
 
         }
