@@ -7,19 +7,27 @@ public class HazardsGenerator : MonoBehaviour
     [SerializeField] private bool testingNewHazzard;
     [SerializeField] private GameObject newHazzard;
     [Space(10)]
-    public List<GameObject> easyHazards, mediumHazards, hardHazards;
+    public List<GameObject> hazardsPrefaps;
+    private List<GameObject> hazardsBool;
     [Space(10)]
     public float minInterval, maxInterval;
     private float currentRandomInterval;
     private GameObject hazardsContainer;
     float TimePassedSenseLastHazard;
     Coroutine IncrementTimerCoroutine;
- 
+
     private void Start()
     {
         hazardsContainer = new GameObject("Hazards Container");
         GameManager.onGameResumed += OnGameResumeHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
+        GameObject tempHazard;
+        hazardsBool = new List<GameObject>();
+        for (int i = 0; i < hazardsPrefaps.Count; i++)
+        {
+            tempHazard = GameObject.Instantiate(hazardsPrefaps[i], Vector3.zero+new Vector3(0,20), Quaternion.identity, hazardsContainer.transform);
+            hazardsBool.Add(tempHazard);
+        }
     }
 
     private void OnGamePausedHandler()
@@ -34,11 +42,13 @@ public class HazardsGenerator : MonoBehaviour
 
     void GenerateNewHazard()
     {
-        GameObject randomHazard = easyHazards[Random.Range(0, easyHazards.Count)];
+        int randomHazardIndex = Random.Range(0, hazardsBool.Count);
+        GameObject randomHazard = hazardsBool[randomHazardIndex];
         if (testingNewHazzard)
             randomHazard = newHazzard;
-        Vector3 hazardPosition = GameManager.instance.playerTransform.position + randomHazard.transform.position;
-        GameObject.Instantiate(randomHazard, hazardPosition, Quaternion.identity, hazardsContainer.transform);
+        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position;
+        randomHazard.transform.position = hazardPosition;
+        //GameObject.Instantiate(randomHazard, hazardPosition, Quaternion.identity, hazardsContainer.transform);
         currentRandomInterval = Random.Range(minInterval, maxInterval + 1);
     }
 
