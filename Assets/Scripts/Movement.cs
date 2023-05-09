@@ -39,6 +39,7 @@ public class Movement : MonoBehaviour
     void OnDirictionChangeHandler(int diriction)
     {
         movementDirection.x = diriction;
+        this.transform.Rotate(Vector3.forward, diriction * 90);
         lastDiriction = diriction;
     }
     void OnMouseUpHandler()

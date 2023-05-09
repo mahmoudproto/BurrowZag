@@ -38,14 +38,20 @@ public class InputController : MonoBehaviour
             initPosition = currentPosition;
             if (delta.x > threshold)
             {
-                direction = 1;
-                onDirectionChange?.Invoke(direction);
+                if (direction != 1)
+                {
+                    direction = 1;
+                    onDirectionChange?.Invoke(direction);
+                }
             }
 
             if (delta.x < -1 * threshold)
             {
-                direction = -1;
-                onDirectionChange?.Invoke(direction);
+                if (direction!=-1)
+                {
+                    direction = -1;
+                    onDirectionChange?.Invoke(direction);
+                }
             }
 
         }

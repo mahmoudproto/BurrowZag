@@ -15,4 +15,14 @@ public class CollisionDetection : MonoBehaviour
             GameManager.instance.PlayerHitHazard();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        this.GetComponent<SpriteRenderer>().color = Color.yellow;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        this.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
 }
