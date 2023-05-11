@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
         GameManager.onStageChangeEvent += OnStageChangeHandler;
     }
+
     void Update()
     {
         if (!GameManager.instance.GameisPaused)
@@ -32,12 +33,15 @@ public class Movement : MonoBehaviour
         else
             rigidbody2D.velocity = Vector2.zero;
     }
+
     void OnMouseDownHandler()
     {
         movementDirection.x = lastDiriction;
     }
     void OnDirictionChangeHandler(int diriction)
     {
+        if (movementDirection.x == diriction)
+            return;
         movementDirection.x = diriction;
         this.transform.Rotate(Vector3.forward, diriction * 90);
         lastDiriction = diriction;
@@ -50,16 +54,19 @@ public class Movement : MonoBehaviour
         else
             movementDirection.x = lastDiriction;
     }
+    
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
             OnMouseDownHandler();
     }
+
     private void OnStageChangeHandler(StageInformations stage)
     {
         currentSpeed = initialSpeed * stage.speed_multiplier;
     }
+
     private void OnDestroy()
     {
         InputController.onDirectionChange -= OnDirictionChangeHandler;

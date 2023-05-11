@@ -29,7 +29,6 @@ public class Collectable : MonoBehaviour
         if (collision.gameObject.tag == characterTag)
         {
             onCollictibleHit?.Invoke(energyToAdd);
-            Debug.Log("collectable hit");
         }
     }
 }

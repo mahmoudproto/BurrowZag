@@ -18,11 +18,13 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        this.GetComponent<SpriteRenderer>().color = Color.yellow;
+        if (collision.CompareTag("Hazards"))
+            this.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        this.GetComponent<SpriteRenderer>().color = Color.white;
+        if (collision.CompareTag("Hazards"))
+            this.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
 }
