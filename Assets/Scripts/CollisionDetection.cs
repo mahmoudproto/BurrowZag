@@ -12,7 +12,15 @@ public class CollisionDetection : MonoBehaviour
             VibratorController.Instance.Vibrate(.25f,255);
             //long[] pattern = { 0, 100, 500, 1000, 500, 200, 100 };
             //VibratorController.Instance.Vibrate(pattern, -1);
-            GameManager.instance.PlayerHitHazard();
+            Hazard other = collision.gameObject.GetComponent<Hazard>();
+            if (other != null && other.Shatter())
+            {
+
+            }
+            else
+            {
+                GameManager.instance.PlayerHitHazard();
+            }
         }
     }
 

@@ -20,10 +20,14 @@ public class EnergyControler : MonoBehaviour
     [Space(5)]
     public float Penetrate_cost;
     public float consumbtion_rate;
-
+    public bool CanPenetrate { get => Penetrate_cost <= current_energy; }
     public static event Action<bool> onEnergysufficiencyChange;
+
+    static EnergyControler instance;
+    public static EnergyControler Instance => instance;
     private void Start()
     {
+        instance = this;
         EnergySlider.maxValue = max_energy;
         EnergySlider.value = max_energy;
         current_energy = max_energy;
@@ -32,7 +36,23 @@ public class EnergyControler : MonoBehaviour
         InputController.onMouseDown += OnHoldHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
     }
+    public bool Penetrate()
+    {
+        if (Penetrate_cost <= current_energy)
+        {
+            current_energy -= Penetrate_cost;
+            EnergySlider.value = current_energy;
+            return true;
+        }
+        else
+            return false;
+    }
 
+    public void AddEnergy(float energy)
+    {
+        current_energy += energy;
+        EnergySlider.value = current_energy;
+    }
     private void OnGamePausedHandler()
     {
         CancelInvoke();

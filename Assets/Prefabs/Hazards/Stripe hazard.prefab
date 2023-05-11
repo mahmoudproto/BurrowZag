@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4593619351149864642}
   - component: {fileID: 4593619351149864641}
   - component: {fileID: 4593619351149864640}
+  - component: {fileID: 2695130677397733573}
   m_Layer: 0
   m_Name: Stripe hazard
   m_TagString: Hazards
@@ -29,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.19999999, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1513846906508898598}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111,3 +113,133 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2695130677397733573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593619351149864671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b0ba7fe9141a748bca53ae8d06ad5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onShatter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4377111392336950912}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4377111392336950912}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4593619351149864641}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4593619351149864640}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1001 &2174383259863245886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4593619351149864642}
+    m_Modifications:
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4919461674517990416, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+      propertyPath: m_Name
+      value: HazardParticls
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+--- !u!4 &1513846906508898598 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 805781152265475352, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+  m_PrefabInstance: {fileID: 2174383259863245886}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4377111392336950912 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2491169624561504958, guid: 04a69104a99fa9d47872b32b6ff4769e, type: 3}
+  m_PrefabInstance: {fileID: 2174383259863245886}
+  m_PrefabAsset: {fileID: 0}
