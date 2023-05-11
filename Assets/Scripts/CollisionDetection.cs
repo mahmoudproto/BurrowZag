@@ -20,6 +20,7 @@ public class CollisionDetection : MonoBehaviour
             else
             {
                 GameManager.instance.PlayerHitHazard();
+                SoundManager.Instance.PlayBlockHit();
             }
         }
     }

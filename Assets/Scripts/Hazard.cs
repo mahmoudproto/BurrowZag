@@ -28,6 +28,7 @@ public class Hazard : MonoBehaviour
         if(penetrated)
         {
             onShatter?.Invoke();
+            SoundManager.Instance.PlayBlockPenetrated();
             Invoke("Initialize", 3);
         }
         return penetrated;

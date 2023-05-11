@@ -29,6 +29,7 @@ public class Collectable : MonoBehaviour
         if (collision.gameObject.tag == characterTag)
         {
             EnergyControler.Instance.AddEnergy(energyToAdd);
+            SoundManager.Instance.PlayCollectible();
             onCollictibleHit?.Invoke(energyToAdd);
         }
     }

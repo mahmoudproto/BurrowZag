@@ -55,6 +55,7 @@ public class Movement : MonoBehaviour
         //make the character move down on release 
         if (isEnergySufficent)
         {
+            SoundManager.Instance.PlayBoost();
             normalSpeed = currentSpeed;
             movementDirection.x = 0;
             StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
