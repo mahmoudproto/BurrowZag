@@ -25,8 +25,20 @@ public class SoundManager : MonoBehaviour
     private static SoundManager instance;
     public static SoundManager Instance => instance;
 
-    public float SfxVolume { get => sfxVolume; set => sfxVolume = value; }
-    public float MusicVolume { get => musicVolume; set => musicVolume = value; }
+    public float SfxVolume {
+        get => sfxVolume;
+        set {
+            sfxVolume = value;
+            sfxAudioSource.volume = sfxVolume;
+        } }
+    public float MusicVolume {
+        get => musicVolume;
+        set
+        {
+            musicVolume = value;
+            audioSource.volume = musicVolume;
+        }
+    }
 
 
     private void Awake()
