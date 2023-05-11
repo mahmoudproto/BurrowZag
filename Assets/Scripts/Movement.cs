@@ -40,6 +40,7 @@ public class Movement : MonoBehaviour
         currentSpeed = normalSpeed;
         CancelInvoke("SlowMo");
         movementDirection.x = lastDiriction;
+        EnergyControler.Instance.BoostActive = false;
     }
     void OnDirictionChangeHandler(int diriction)
     {
@@ -57,6 +58,7 @@ public class Movement : MonoBehaviour
             normalSpeed = currentSpeed;
             movementDirection.x = 0;
             StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
+            EnergyControler.Instance.BoostActive = true ;
         }
         else
         {

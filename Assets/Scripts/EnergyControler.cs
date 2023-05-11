@@ -20,11 +20,12 @@ public class EnergyControler : MonoBehaviour
     [Space(5)]
     public float Penetrate_cost;
     public float consumbtion_rate;
-    public bool CanPenetrate { get => Penetrate_cost <= current_energy; }
+    public bool CanPenetrate { get => Penetrate_cost <= current_energy && BoostActive; }
     public static event Action<bool> onEnergysufficiencyChange;
 
     static EnergyControler instance;
     public static EnergyControler Instance => instance;
+    public bool BoostActive { get; set; }
     private void Start()
     {
         instance = this;
@@ -38,7 +39,7 @@ public class EnergyControler : MonoBehaviour
     }
     public bool Penetrate()
     {
-        if (Penetrate_cost <= current_energy)
+        if (CanPenetrate)
         {
             current_energy -= Penetrate_cost;
             EnergySlider.value = current_energy;
