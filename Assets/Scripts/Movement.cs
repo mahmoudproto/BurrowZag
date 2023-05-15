@@ -22,9 +22,10 @@ public class Movement : MonoBehaviour
         normalSpeed = currentSpeed;
         InputController.onDirectionChange += OnDirictionChangeHandler;
         InputController.onMouseDown += OnMouseDownHandler;
-        InputController.onMouseUp += OnMouseUpHandler;
+        //InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
         GameManager.onStageChangeEvent += OnStageChangeHandler;
+        InputController.onDoubleTap += OnMouseUpHandler;
     }
 
     void Update()
@@ -84,7 +85,7 @@ public class Movement : MonoBehaviour
     {
         InputController.onDirectionChange -= OnDirictionChangeHandler;
         InputController.onMouseDown -= OnMouseDownHandler;
-        InputController.onMouseUp -= OnMouseUpHandler;
+        InputController.onDoubleTap -= OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange -= onInsufficantEnergyHandler;
     }
 

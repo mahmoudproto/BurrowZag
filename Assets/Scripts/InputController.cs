@@ -9,16 +9,18 @@ public class InputController : MonoBehaviour
     public static event Action<int> onDirectionChange;
     public static event Action onMouseDown;
     public static event Action onMouseUp;
-
+    public static event Action onDoubleTap;
 
     // direction and changing threshold
     [SerializeField] int direction;
     public int Direction { private set { direction = value; } get { return direction; } }
-    [SerializeField] float threshold = 0.5f;
+    [SerializeField] float directionChangeThreshold = 0.5f;
+
+    [SerializeField] float doubleTapSpeed;
 
     void Start()
     {
-
+        DoubleTapDetector.Instance.onDoubleTap += onDoubleTap;
     }
     Vector2 initPosition;
     Vector2 currentPosition;
@@ -36,7 +38,7 @@ public class InputController : MonoBehaviour
             currentPosition = Input.mousePosition;
             delta = currentPosition - initPosition;
             initPosition = currentPosition;
-            if (delta.x > threshold)
+            if (delta.x > directionChangeThreshold)
             {
                 if (direction != 1)
                 {
@@ -45,7 +47,7 @@ public class InputController : MonoBehaviour
                 }
             }
 
-            if (delta.x < -1 * threshold)
+            if (delta.x < -1 * directionChangeThreshold)
             {
                 if (direction!=-1)
                 {
