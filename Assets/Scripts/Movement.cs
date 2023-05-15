@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
         currentSpeed = initialSpeed;
         normalSpeed = currentSpeed;
         InputController.onDirectionChange += OnDirictionChangeHandler;
-        InputController.onMouseDown += OnMouseDownHandler;
+        InputController.onMouseDown += ReturnToNormalSpeed;
         InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
         GameManager.onStageChangeEvent += OnStageChangeHandler;
@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
             rigidbody2D.velocity = Vector2.zero;
     }
 
-    void OnMouseDownHandler()
+    void ReturnToNormalSpeed()
     {
         currentSpeed = normalSpeed;
         CancelInvoke("SlowMo");
@@ -44,35 +44,37 @@ public class Movement : MonoBehaviour
     }
     void OnDirictionChangeHandler(int diriction)
     {
-        if (movementDirection.x == diriction)
-            return;
         movementDirection.x = diriction;
         this.transform.Rotate(Vector3.forward, diriction * 90);
         lastDiriction = diriction;
+        ReturnToNormalSpeed();
     }
     void OnMouseUpHandler()
     {
+        if (movementDirection.x == 0)
+            return;
+        normalSpeed = currentSpeed;
+        Debug.Log("OnMouseUpHandler called");
         //make the character move down on release 
         if (isEnergySufficent)
         {
             SoundManager.Instance.PlayBoost();
-            normalSpeed = currentSpeed;
             movementDirection.x = 0;
             StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
             EnergyControler.Instance.BoostActive = true ;
         }
         else
         {
-            //currentSpeed = normalSpeed;
             movementDirection.x = lastDiriction;
         }
+
     }
     
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
-            OnMouseDownHandler();
+            ReturnToNormalSpeed();
     }
 
     private void OnStageChangeHandler(StageInformations stage)
@@ -83,7 +85,7 @@ public class Movement : MonoBehaviour
     private void OnDestroy()
     {
         InputController.onDirectionChange -= OnDirictionChangeHandler;
-        InputController.onMouseDown -= OnMouseDownHandler;
+        InputController.onMouseDown -= ReturnToNormalSpeed;
         InputController.onMouseUp -= OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange -= onInsufficantEnergyHandler;
     }

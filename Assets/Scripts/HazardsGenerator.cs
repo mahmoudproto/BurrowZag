@@ -8,13 +8,15 @@ public class HazardsGenerator : MonoBehaviour
     [SerializeField] private GameObject newHazzard;
     [Space(10)]
     public List<GameObject> hazardsPrefaps;
+    [SerializeField] private float extra_hazards_spawn_distance;
     private List<GameObject> hazardsBool;
     [Space(10)]
-    public float minInterval, maxInterval;
-    private float currentRandomInterval;
+    [SerializeField] private float minInterval, maxInterval;
+    [SerializeField] private float currentRandomInterval;
     private GameObject hazardsContainer;
-    float TimePassedSenseLastHazard;
-    Coroutine IncrementTimerCoroutine;
+    private float TimePassedSenseLastHazard;
+    private Coroutine IncrementTimerCoroutine;
+    private int previous_randomHazardIndex = -1;
 
     private void Start()
     {
@@ -22,10 +24,11 @@ public class HazardsGenerator : MonoBehaviour
         GameManager.onGameResumed += OnGameResumeHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
         GameObject tempHazard;
+        const int vertical_distance = 20;
         hazardsBool = new List<GameObject>();
         for (int i = 0; i < hazardsPrefaps.Count; i++)
         {
-            tempHazard = GameObject.Instantiate(hazardsPrefaps[i], Vector3.zero+new Vector3(0,20), Quaternion.identity, hazardsContainer.transform);
+            tempHazard = GameObject.Instantiate(hazardsPrefaps[i], Vector3.zero + new Vector3(0, vertical_distance), Quaternion.identity, hazardsContainer.transform);
             hazardsBool.Add(tempHazard);
         }
     }
@@ -43,13 +46,17 @@ public class HazardsGenerator : MonoBehaviour
     void GenerateNewHazard()
     {
         int randomHazardIndex = Random.Range(0, hazardsBool.Count);
+        //get a new random index if it's the same as the previous hazard #lazy solution
+        if (previous_randomHazardIndex == randomHazardIndex)
+            randomHazardIndex = Random.Range(0, hazardsBool.Count);
+        previous_randomHazardIndex = randomHazardIndex;
         GameObject randomHazard = hazardsBool[randomHazardIndex];
         if (testingNewHazzard)
-            randomHazard = newHazzard;
-        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position;
+            randomHazard = GameObject.Instantiate(newHazzard, Vector3.zero , Quaternion.identity, hazardsContainer.transform); ;
+        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position - new Vector3(0,extra_hazards_spawn_distance);
         randomHazard.transform.position = hazardPosition;
-        //GameObject.Instantiate(randomHazard, hazardPosition, Quaternion.identity, hazardsContainer.transform);
         currentRandomInterval = Random.Range(minInterval, maxInterval + 1);
+        randomHazard.GetComponentInChildren<CollectibleRandomizer>().Randomize();
     }
 
     IEnumerator IncrementTimePassed()

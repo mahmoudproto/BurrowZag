@@ -26,6 +26,8 @@ public class InputController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.GameisPaused)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
             initPosition = Input.mousePosition;

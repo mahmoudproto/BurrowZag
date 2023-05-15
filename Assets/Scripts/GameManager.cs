@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public static event Action<float> onGameOver;
     public static event Action<StageInformations> onStageChangeEvent;
     public static event Action<float> OnEnergyPackHit;
+    public static event Action<Collectible> OnNewEnergyPackGenerated;
     private void Awake()
     {
         if (instance == null)
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
     public void Fire_EnergyPack_Hit_event(float energy)
     {
         OnEnergyPackHit?.Invoke(energy);
+    }
+
+    public void Fire_NewEnergyPackGenerated(Collectible collectable)
+    {
+        OnNewEnergyPackGenerated?.Invoke(collectable);
     }
 
     public void intialzeNewRun()
@@ -80,11 +86,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator ChangeStageAfter(float secounds,StageInformations stageInfo)
+    IEnumerator ChangeStageAfter(float seconds,StageInformations stageInfo)
     {
-        yield return new WaitForSeconds(secounds);
+        yield return new WaitForSeconds(seconds);
         ChangeStage(stageInfo);
-        Debug.Log("stage started at "+ timePassed);
     }
 
     private void ChangeStage(StageInformations stage)

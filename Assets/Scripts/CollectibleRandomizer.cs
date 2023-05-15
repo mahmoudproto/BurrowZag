@@ -4,24 +4,7 @@ using UnityEngine;
 
 public class CollectibleRandomizer : MonoBehaviour
 {
-    [SerializeField] Collectable[] collectablesInArea;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-        Randomize();
-    }
-
+    [SerializeField] Collectible[] collectablesInArea;
     public void Randomize()
     {
         if (collectablesInArea == null || collectablesInArea.Length == 0)
@@ -35,5 +18,6 @@ public class CollectibleRandomizer : MonoBehaviour
             collectablesInArea[i].GetComponent<SpriteRenderer>().enabled = true;
 
         }
+        GameManager.instance.Fire_NewEnergyPackGenerated(collectablesInArea[selected]);
     }
 }

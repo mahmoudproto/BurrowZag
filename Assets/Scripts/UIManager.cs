@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
         score_text.text = ((int)score).ToString();
     }
 
+    //get's called on pointer down of the "Start New Game overlay" located in the HUD canvas 
     public void StartNewGame()
     {
         startNewGameOverlay.SetActive(false);
