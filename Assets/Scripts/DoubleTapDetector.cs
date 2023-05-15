@@ -19,10 +19,10 @@ public class DoubleTapDetector : MonoBehaviour
     [SerializeField] float maxDownUpDistance = 1f;
     Vector2 downPosition;
     Vector2 positionDelta;
-
+    [SerializeField] float doubleTapCoolDown=2;
     static DoubleTapDetector instance;
 
-    public static DoubleTapDetector Instance => instance ? instance : instance = new GameObject("DoubleTap").AddComponent<DoubleTapDetector>();
+    public static DoubleTapDetector Instance => instance;// ? instance : instance = new GameObject("DoubleTap").AddComponent<DoubleTapDetector>();
 
     public event Action onDoubleTap;
 
@@ -46,11 +46,17 @@ public class DoubleTapDetector : MonoBehaviour
                 {
                     //print("DOuble tap");
                     onDoubleTap?.Invoke();
+                    lastTap = 0;
+                    lastMouseUp = 0;
+                    lastMouseDown = 0;
+                    Disable();
+                    Invoke("Enable",doubleTapCoolDown);
                 }
-                lastTap = Time.time;
+                else
+                    lastTap = Time.time;
             }
-            lastMouseUp = Time.time;
-
+            else
+                lastMouseUp = Time.time;
 
             #region oldCode
             //print("Time: " + Time.time);
@@ -75,10 +81,22 @@ public class DoubleTapDetector : MonoBehaviour
             #endregion
         }
     }
+    private void Enable()
+    {
+        enabled = true;
+    }
 
+    private void Disable()
+    {
+        enabled = false;
+    }
     private void Awake()
     {
         instance = this;
     }
+    private void Start()
+    {
 
+        //DontDestroyOnLoad(gameObject);
+    }
 }

@@ -18,13 +18,18 @@ public class InputController : MonoBehaviour
 
     [SerializeField] float doubleTapSpeed;
 
+    Vector2 initPosition;
+    Vector2 currentPosition;
+    Vector2 delta;
     void Start()
     {
         DoubleTapDetector.Instance.onDoubleTap += onDoubleTap;
     }
-    Vector2 initPosition;
-    Vector2 currentPosition;
-    Vector2 delta;
+    private void OnDestroy()
+    {
+        DoubleTapDetector.Instance.onDoubleTap -= onDoubleTap;
+    }
+
 
     void Update()
     {
