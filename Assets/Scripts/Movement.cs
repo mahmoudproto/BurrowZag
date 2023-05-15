@@ -8,6 +8,9 @@ public class Movement : MonoBehaviour
     [SerializeField] float initialSpeed = 6;
     [SerializeField] float energizedSpeed = 12;
 
+    [SerializeField] AnimationCurve boostSpeedTransition;
+    [SerializeField] float boostTransitionDuration;
+
     float currentSpeed;
     new Rigidbody2D rigidbody2D;
     Vector2 movementDirection=new Vector2(-1,-1);
@@ -18,8 +21,8 @@ public class Movement : MonoBehaviour
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         GameManager.instance.playerTransform = this.transform;
-        currentSpeed = initialSpeed;
-        normalSpeed = currentSpeed;
+        normalSpeed = initialSpeed;
+        currentSpeed = normalSpeed;
         InputController.onDirectionChange += OnDirictionChangeHandler;
         InputController.onMouseDown += OnMouseDownHandler;
         //InputController.onMouseUp += OnMouseUpHandler;
@@ -39,7 +42,8 @@ public class Movement : MonoBehaviour
     void OnMouseDownHandler()
     {
         currentSpeed = normalSpeed;
-        CancelInvoke("SlowMo");
+        //CancelInvoke("SlowMo");
+        CancelInvoke("SpeedTransition");
         movementDirection.x = lastDiriction;
         EnergyControler.Instance.BoostActive = false;
     }
@@ -57,9 +61,11 @@ public class Movement : MonoBehaviour
         if (isEnergySufficent)
         {
             SoundManager.Instance.PlayBoost();
-            normalSpeed = currentSpeed;
+            //normalSpeed = currentSpeed;
             movementDirection.x = 0;
-            StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
+            //StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
+
+            StartCoroutine(SpeedTransition(normalSpeed, energizedSpeed));
             EnergyControler.Instance.BoostActive = true ;
         }
         else
@@ -78,7 +84,7 @@ public class Movement : MonoBehaviour
 
     private void OnStageChangeHandler(StageInformations stage)
     {
-        currentSpeed = initialSpeed * stage.speed_multiplier;
+        normalSpeed = initialSpeed * stage.speed_multiplier;
     }
 
     private void OnDestroy()
@@ -93,10 +99,21 @@ public class Movement : MonoBehaviour
     {
         for (float i = startSpeed, astep=step; i <= targetSpeed; astep=astep+astep, i += astep)
         {
+            
             currentSpeed = Mathf.Min(energizedSpeed, i+astep);
             yield return new WaitForSeconds(0.1f);
         }
 
+    }
+
+    IEnumerator SpeedTransition(float startSpeed, float targetSpeed)
+    {
+        for(float i=0;i<boostTransitionDuration;)
+        {
+            currentSpeed = startSpeed + boostSpeedTransition.Evaluate(i / boostTransitionDuration)*targetSpeed;
+            i += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
 }
