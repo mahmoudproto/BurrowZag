@@ -33,7 +33,7 @@ public class EnergyControler : MonoBehaviour
         EnergySlider.value = max_energy;
         current_energy = max_energy;
         EventsTest.weakpoint_Hit_event += AddEnergyHandler;
-        InputController.onMouseUp += DecreaseEnergy;
+        InputController.onDoubleTap += DecreaseEnergy;
         InputController.onMouseDown += OnHoldHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
     }
@@ -108,7 +108,7 @@ public class EnergyControler : MonoBehaviour
     private void OnDestroy()
     {
         EventsTest.weakpoint_Hit_event -= AddEnergyHandler;
-        InputController.onMouseUp -= DecreaseEnergy;
+        InputController.onDoubleTap -= DecreaseEnergy;
         InputController.onMouseDown -= OnHoldHandler;
         GameManager.onGamePaused -= OnGamePausedHandler;
     }
