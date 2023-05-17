@@ -38,10 +38,11 @@ public class GameManager : MonoBehaviour
     {
         OnEnergyPackHit?.Invoke(energy);
     }
-
+    int lastIndex=0;
     public void Fire_NewEnergyPackGenerated(Collectible collectable)
     {
         OnNewEnergyPackGenerated?.Invoke(collectable);
+        collectable.MyIndex = lastIndex++;
     }
 
     public void intialzeNewRun()
