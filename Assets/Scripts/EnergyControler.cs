@@ -55,13 +55,13 @@ public class EnergyControler : MonoBehaviour
 
     public void AddEnergy(float energy)
     {
-        current_energy += energy * comboMultiplier.CurrentStageMultiplier;
+        if (current_energy <= Penetrate_cost)
+            onEnergysufficiencyChange?.Invoke(true);
 
-        EnergySlider.value = current_energy;
+        current_energy += energy * comboMultiplier.CurrentStageMultiplier;
         if (current_energy > max_energy)
             current_energy = max_energy;
-        if (current_energy >= Penetrate_cost)
-            onEnergysufficiencyChange?.Invoke(true);
+        EnergySlider.value = current_energy;
     }
 
     private void OnGamePausedHandler()
