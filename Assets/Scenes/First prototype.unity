@@ -406,7 +406,7 @@ MonoBehaviour:
   - {fileID: 8091110250826181069, guid: 7fb165a5b444cb946b0eaf585d9cd6ab, type: 3}
   - {fileID: 3305216912851221505, guid: b1c97fabd7dbe614e870487491597e43, type: 3}
   - {fileID: 8091110250826181069, guid: 727d7a3f12c2e3541b87df04f7db4720, type: 3}
-  extra_hazards_spawn_distance: 0
+  extraHazardDistance: 0
   minInterval: 2
   maxInterval: 4
   currentRandomInterval: 2
@@ -3339,6 +3339,14 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.003921569
       objectReference: {fileID: 0}
+    - target: {fileID: 378787051, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 606898370, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 690174868, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3498,6 +3506,26 @@ PrefabInstance:
     - target: {fileID: 5323176775731334469, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323176775731334490, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: comboMultiplier.multiplierStages.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323176775731334490, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: comboMultiplier.multiplierStages.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323176775731334490, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: comboMultiplier.multiplierStages.Array.data[2]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323176775731334490, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: comboMultiplier.multiplierStages.Array.data[3]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323176775731334490, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}
+      propertyPath: comboMultiplier.multiplierStages.Array.data[4]
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebd039e8f3e73484e974e710673f57c1, type: 3}

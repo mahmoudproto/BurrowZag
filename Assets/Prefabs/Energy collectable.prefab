@@ -4985,7 +4985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30e20db9d32cac4085fba575f4bf5c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToAdd: 20
+  energyToAdd: 1
   characterTag: character
   onCollictibleHit:
     m_PersistentCalls:

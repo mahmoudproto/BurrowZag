@@ -7,6 +7,9 @@ using TMPro;
 
 public class EnergyControler : MonoBehaviour
 {
+    [Header("Combo multiplier")]
+    [SerializeField] ComboMultiplier comboMultiplier;
+    [Space(5)]
     [Range(0,100)]
     [SerializeField]float current_energy;
     public int max_energy;
@@ -52,7 +55,8 @@ public class EnergyControler : MonoBehaviour
 
     public void AddEnergy(float energy)
     {
-        current_energy += energy;
+        current_energy += energy * comboMultiplier.CurrentStageMultiplier;
+
         EnergySlider.value = current_energy;
         if (current_energy > max_energy)
             current_energy = max_energy;
