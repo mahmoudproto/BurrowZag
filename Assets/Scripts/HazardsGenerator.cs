@@ -8,7 +8,7 @@ public class HazardsGenerator : MonoBehaviour
     [SerializeField] private GameObject newHazzard;
     [Space(10)]
     public List<GameObject> hazardsPrefaps;
-    [SerializeField] private float extra_hazards_spawn_distance;
+    [SerializeField] private float extraHazardDistance;
     private List<GameObject> hazardsBool;
     [Space(10)]
     [SerializeField] private float minInterval, maxInterval;
@@ -53,7 +53,7 @@ public class HazardsGenerator : MonoBehaviour
         GameObject randomHazard = hazardsBool[randomHazardIndex];
         if (testingNewHazzard)
             randomHazard = GameObject.Instantiate(newHazzard, Vector3.zero , Quaternion.identity, hazardsContainer.transform); ;
-        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position - new Vector3(0,extra_hazards_spawn_distance);
+        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position - new Vector3(0,extraHazardDistance);
         randomHazard.transform.position = hazardPosition;
         currentRandomInterval = Random.Range(minInterval, maxInterval + 1);
         randomHazard.GetComponentInChildren<CollectibleRandomizer>().Randomize();
