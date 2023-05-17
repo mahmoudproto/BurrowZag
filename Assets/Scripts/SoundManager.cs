@@ -82,11 +82,17 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayCollectible()
     {
+        sfxAudioSource.pitch = EnergyControler.Instance.comboMultiplier.CurrentStagePitch;
         sfxAudioSource.PlayOneShot(collectable, sfxVolume);
+        Invoke("SetSfxPitch",0.1f);
     }
     public void PlayBoost()
     {
         sfxAudioSource.PlayOneShot(boost, sfxVolume);
     }
 
+    void SetSfxPitch()
+    {
+        sfxAudioSource.pitch = 1;
+    }
 }
