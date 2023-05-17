@@ -23,12 +23,12 @@ public class Movement : MonoBehaviour
         GameManager.instance.playerTransform = this.transform;
         normalSpeed = initialSpeed;
         currentSpeed = normalSpeed;
-        InputController.onDirectionChange += OnDirictionChangeHandler;
-        InputController.onMouseDown += OnMouseDownHandler;
+        InputController.onDirectionChange += ChangeDirection;
+        InputController.onMouseDown += DeactivateEnergyBoost;
         //InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
         GameManager.onStageChangeEvent += OnStageChangeHandler;
-        InputController.onDoubleTap += OnMouseUpHandler;
+        InputController.onDoubleTap += ActivateEnergyBoost;
     }
 
     void Update()
@@ -39,24 +39,28 @@ public class Movement : MonoBehaviour
             rigidbody2D.velocity = Vector2.zero;
     }
 
-    void OnMouseDownHandler()
+    void DeactivateEnergyBoost()
     {
+
+        print($"Deativate energy " + Time.time);
         currentSpeed = normalSpeed;
         //CancelInvoke("SlowMo");
-        CancelInvoke("SpeedTransition");
+        StopCoroutine("SpeedTransition");
         movementDirection.x = lastDiriction;
         EnergyControler.Instance.BoostActive = false;
     }
-    void OnDirictionChangeHandler(int diriction)
+    void ChangeDirection(int direction)
     {
-        if (movementDirection.x == diriction)
+        print($"Change direction " + Time.time);
+        if (movementDirection.x == direction || movementDirection.x == 0)
             return;
-        movementDirection.x = diriction;
-        this.transform.Rotate(Vector3.forward, diriction * 90);
-        lastDiriction = diriction;
+        movementDirection.x = direction;
+        this.transform.Rotate(Vector3.forward, direction * 90);
+        lastDiriction = direction;
     }
-    void OnMouseUpHandler()
+    void ActivateEnergyBoost()
     {
+        print($"Activate energy " + Time.time);
         //make the character move down on release 
         if (isEnergySufficent)
         {
@@ -65,13 +69,13 @@ public class Movement : MonoBehaviour
             movementDirection.x = 0;
             //StartCoroutine(SlowMo(initialSpeed / 4f, energizedSpeed, .2f));
 
-            StartCoroutine(SpeedTransition(normalSpeed, energizedSpeed));
             EnergyControler.Instance.BoostActive = true ;
+            StartCoroutine(SpeedTransition(normalSpeed, energizedSpeed));
         }
         else
         {
             //currentSpeed = normalSpeed;
-            movementDirection.x = lastDiriction;
+            //movementDirection.x = lastDiriction;
         }
     }
     
@@ -79,7 +83,7 @@ public class Movement : MonoBehaviour
     {
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
-            OnMouseDownHandler();
+            DeactivateEnergyBoost();
     }
 
     private void OnStageChangeHandler(StageInformations stage)
@@ -89,9 +93,9 @@ public class Movement : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputController.onDirectionChange -= OnDirictionChangeHandler;
-        InputController.onMouseDown -= OnMouseDownHandler;
-        InputController.onDoubleTap -= OnMouseUpHandler;
+        InputController.onDirectionChange -= ChangeDirection;
+        InputController.onMouseDown -= DeactivateEnergyBoost;
+        InputController.onDoubleTap -= ActivateEnergyBoost;
         EnergyControler.onEnergysufficiencyChange -= onInsufficantEnergyHandler;
     }
 
@@ -110,7 +114,10 @@ public class Movement : MonoBehaviour
     {
         for(float i=0;i<boostTransitionDuration;)
         {
-            currentSpeed = startSpeed + boostSpeedTransition.Evaluate(i / boostTransitionDuration)*targetSpeed;
+            if (!EnergyControler.Instance.BoostActive)
+                break;
+            print($"changing speed " + Time.time);
+            currentSpeed = startSpeed + boostSpeedTransition.Evaluate(i / boostTransitionDuration) * targetSpeed;
             i += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
