@@ -23,13 +23,13 @@ public class InputController : MonoBehaviour
     Vector2 delta;
     void Start()
     {
-        DoubleTapDetector.Instance.onDoubleTap += onDoubleTap;
-    }
-    private void OnDestroy()
-    {
-        DoubleTapDetector.Instance.onDoubleTap -= onDoubleTap;
+        DoubleTapDetector.Instance.onDoubleTap += Invoke_OnDoubleTap;
     }
 
+    void Invoke_OnDoubleTap()
+    {
+        onDoubleTap?.Invoke();
+    }
 
     void Update()
     {
@@ -68,21 +68,13 @@ public class InputController : MonoBehaviour
         {
             onMouseUp?.Invoke();
         }
+    }
 
-
-        //print(Input.touchCount);
-
-        //if (Input.touchCount > 0)
-        //{
-        //    if (Input.GetTouch(0).deltaPosition.x > threshold)
-        //    {
-        //        direction = 1;
-        //    }
-
-        //    if (Input.GetTouch(0).deltaPosition.x < -1 * threshold)
-        //    {
-        //        direction = -1;
-        //    }
-        //}
+    private void OnDestroy()
+    {
+        onDoubleTap = null;
+        onMouseDown = null;
+        onMouseUp = null;
+        onDirectionChange = null;
     }
 }
