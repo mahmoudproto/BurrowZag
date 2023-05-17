@@ -7,9 +7,10 @@ using TMPro;
 
 public class EnergyControler : MonoBehaviour
 {
-    float current_energy;
+    [Range(0,100)]
+    [SerializeField]float current_energy;
     public int max_energy;
-    public Slider EnergySlider;
+    [SerializeField] Slider EnergySlider;
     [Header("Bonus Percentages %")]
     [Space(5)]
     public int weakpoint_bonus;
@@ -30,13 +31,13 @@ public class EnergyControler : MonoBehaviour
     {
         instance = this;
         EnergySlider.maxValue = max_energy;
-        EnergySlider.value = max_energy;
-        current_energy = max_energy;
-        EventsTest.weakpoint_Hit_event += AddEnergyHandler;
+        EnergySlider.value = current_energy;
         InputController.onDoubleTap += DecreaseEnergy;
         InputController.onMouseDown += OnHoldHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
+        GameManager.onGameResumed += OnGameResumedHandler;
     }
+
     public bool Penetrate()
     {
         if (CanPenetrate)
@@ -53,35 +54,30 @@ public class EnergyControler : MonoBehaviour
     {
         current_energy += energy;
         EnergySlider.value = current_energy;
-    }
-    private void OnGamePausedHandler()
-    {
-        CancelInvoke();
-    }
-
-    private void OnHoldHandler()
-    {
-       CancelInvoke();
-    }
-
-    private float deltaTime;
-    [SerializeField] TMPro.TMP_Text FPS_text;
-    private void Update()
-    {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        float fps = 1.0f / deltaTime;
-        //Application.targetFrameRate = 60;
-        FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();// + "\nTarget = " + Application.targetFrameRate;
-    }
-
-    void AddEnergyHandler()
-    {
-        current_energy += (max_energy * weakpoint_bonus / 100);
-        EnergySlider.value = current_energy;
         if (current_energy > max_energy)
             current_energy = max_energy;
         if (current_energy >= Penetrate_cost)
             onEnergysufficiencyChange?.Invoke(true);
+    }
+
+    private void OnGamePausedHandler()
+    {
+        CancelInvoke();
+        BoostActive = false;
+    }
+
+    private void OnGameResumedHandler()
+    {
+        if (!BoostActive)
+            return;
+        DecreaseEnergy();
+
+    }
+
+    private void OnHoldHandler()
+    {
+        CancelInvoke();
+        BoostActive = false;
     }
 
     void DecreaseEnergy()
@@ -92,6 +88,7 @@ public class EnergyControler : MonoBehaviour
             return;
         }
         InvokeRepeating("DecreaseEnergyEverySecound", 0, consumbtion_rate);
+        BoostActive = true;
     }
     void DecreaseEnergyEverySecound()
     {
@@ -107,7 +104,6 @@ public class EnergyControler : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventsTest.weakpoint_Hit_event -= AddEnergyHandler;
         InputController.onDoubleTap -= DecreaseEnergy;
         InputController.onMouseDown -= OnHoldHandler;
         GameManager.onGamePaused -= OnGamePausedHandler;
