@@ -14,6 +14,17 @@ public class UIManager : MonoBehaviour
         GameManager.onGameOver += GameOver_Handler;
     }
 
+
+    private float deltaTime;
+    [SerializeField] TMPro.TMP_Text FPS_text;
+    //private void Update()
+    //{
+    //    deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+    //    float fps = 1.0f / deltaTime;
+    //    //Application.targetFrameRate = 60;
+    //    FPS_text.text = "FPS : " + Mathf.Ceil(fps).ToString();// + "\nTarget = " + Application.targetFrameRate;
+    //}
+
     void GameOver_Handler(float score)
     {
         gameOverScreen.SetActive(true);
@@ -29,7 +40,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnDestroy()
