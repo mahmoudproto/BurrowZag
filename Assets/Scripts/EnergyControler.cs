@@ -7,9 +7,6 @@ using TMPro;
 
 public class EnergyControler : MonoBehaviour
 {
-    [Header("Combo multiplier")]
-    [SerializeField] ComboMultiplier comboMultiplier;
-    [Space(5)]
     [Range(0,100)]
     [SerializeField]float current_energy;
     public int max_energy;
@@ -24,6 +21,9 @@ public class EnergyControler : MonoBehaviour
     [Space(5)]
     public float Penetrate_cost;
     public float consumbtion_rate;
+
+
+    public ComboMultiplier comboMultiplier;
     public bool CanPenetrate { get => Penetrate_cost <= current_energy && BoostActive; }
     public static event Action<bool> onEnergysufficiencyChange;
 

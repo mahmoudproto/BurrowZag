@@ -31,6 +31,7 @@ public class Collectible : MonoBehaviour
             EnergyControler.Instance.AddEnergy(energyToAdd);
             SoundManager.Instance.PlayCollectible();
             onCollictibleHit?.Invoke(energyToAdd);
+            EnergyControler.Instance.comboMultiplier.IncreaseStage();
         }
     }
 }
