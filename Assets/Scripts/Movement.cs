@@ -41,8 +41,6 @@ public class Movement : MonoBehaviour
 
     void DeactivateEnergyBoost()
     {
-
-        print($"Deativate energy " + Time.time);
         currentSpeed = normalSpeed;
         //CancelInvoke("SlowMo");
         StopCoroutine("SpeedTransition");
@@ -51,7 +49,6 @@ public class Movement : MonoBehaviour
     }
     void ChangeDirection(int direction)
     {
-        print($"Change direction " + Time.time);
         if (movementDirection.x == direction || movementDirection.x == 0)
             return;
         movementDirection.x = direction;
@@ -60,7 +57,6 @@ public class Movement : MonoBehaviour
     }
     void ActivateEnergyBoost()
     {
-        print($"Activate energy " + Time.time);
         //make the character move down on release 
         if (isEnergySufficent)
         {
@@ -81,6 +77,7 @@ public class Movement : MonoBehaviour
     
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
+        Debug.Log("energy sufficiency changed " +isSufficent);
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
             DeactivateEnergyBoost();
@@ -88,7 +85,7 @@ public class Movement : MonoBehaviour
 
     private void OnStageChangeHandler(StageInformations stage)
     {
-        normalSpeed = initialSpeed * stage.speed_multiplier;
+        currentSpeed = initialSpeed * stage.speed_multiplier;
     }
 
     private void OnDestroy()
@@ -116,7 +113,6 @@ public class Movement : MonoBehaviour
         {
             if (!EnergyControler.Instance.BoostActive)
                 break;
-            print($"changing speed " + Time.time);
             currentSpeed = startSpeed + boostSpeedTransition.Evaluate(i / boostTransitionDuration) * targetSpeed;
             i += Time.deltaTime;
             yield return new WaitForEndOfFrame();
