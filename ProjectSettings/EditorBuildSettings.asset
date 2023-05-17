@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/M First prototype mahmoud version.unity
+    guid: f2531976744ce1b499ec0242259696ff
   - enabled: 1
     path: Assets/Scenes/First prototype.unity
     guid: 7aaba00a024f817418fea26fb960da94
