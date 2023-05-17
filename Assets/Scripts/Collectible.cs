@@ -7,10 +7,13 @@ public class Collectible : MonoBehaviour
     [SerializeField]
     private float energyToAdd;
     [SerializeField] string characterTag;
+
+    static int lastCollectibleIndex=0;
+    public int MyIndex { get; set; }
     public float EnergyToAdd 
-    { 
-        get=>energyToAdd; 
-        set=>energyToAdd=value;
+    {
+        get => energyToAdd;
+        set => energyToAdd = value;
     }
 
     private void Start()
@@ -28,10 +31,13 @@ public class Collectible : MonoBehaviour
     {
         if (collision.gameObject.tag == characterTag)
         {
+            if (lastCollectibleIndex + 1 == MyIndex)
+                EnergyControler.Instance.comboMultiplier.IncreaseStage();
+            else
+                EnergyControler.Instance.comboMultiplier.ResetStage();
             EnergyControler.Instance.AddEnergy(energyToAdd);
             SoundManager.Instance.PlayCollectible();
             onCollictibleHit?.Invoke(energyToAdd);
-            EnergyControler.Instance.comboMultiplier.IncreaseStage();
         }
     }
 }

@@ -59,6 +59,8 @@ public class EnergyControler : MonoBehaviour
             onEnergysufficiencyChange?.Invoke(true);
 
         current_energy += energy * comboMultiplier.CurrentStageMultiplier;
+        print("Add energy: " + energy * comboMultiplier.CurrentStageMultiplier);
+
         if (current_energy > max_energy)
             current_energy = max_energy;
         EnergySlider.value = current_energy;

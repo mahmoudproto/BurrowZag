@@ -29,5 +29,9 @@ public class ComboMultiplier
         stageIndex = Mathf.Min(stageIndex + 1, multiplierStages.Length - 1);
     }
 
+    public void ResetStage()
+    {
+        stageIndex = 0;
+    }
 
 }
