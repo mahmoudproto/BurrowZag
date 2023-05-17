@@ -85,7 +85,8 @@ public class Movement : MonoBehaviour
 
     private void OnStageChangeHandler(StageInformations stage)
     {
-        currentSpeed = initialSpeed * stage.speed_multiplier;
+        normalSpeed = initialSpeed * stage.speed_multiplier;
+        currentSpeed = normalSpeed;
     }
 
     private void OnDestroy()
