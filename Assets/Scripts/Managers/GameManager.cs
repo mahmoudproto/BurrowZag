@@ -105,7 +105,17 @@ public class GameManager : MonoBehaviour
         PauseGame();
         onGameOver?.Invoke(score);
     }
+
+    private void OnDestroy()
+    {
+        onGameOver = null;
+        onGamePaused = null;
+        onGameResumed = null;
+        onStageChangeEvent = null;
+    }
+
 }
+
 [Serializable]
 public struct StageInformations
 {

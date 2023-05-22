@@ -54,8 +54,8 @@ public class EnergyPackIndicatorController : MonoBehaviour
 
         newIndicatorPosition = new Vector3(indicatorXPosition, playerTransform.position.y - verticalOffset);
         indicator.transform.position = newIndicatorPosition;
+
         arrow.transform.up = arrow.transform.position - (Vector3)collectiblePosition;
-        //arrow.transform.RotateAround(indicator.transform.position, Vector3.forward, Vector3.Angle(collectiblePosition, indicator.transform.position));
     }
 
     private void OnDestroy()

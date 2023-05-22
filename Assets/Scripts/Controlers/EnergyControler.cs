@@ -110,9 +110,7 @@ public class EnergyControler : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputController.onDoubleTap -= DecreaseEnergy;
-        InputController.onMouseDown -= OnHoldHandler;
-        GameManager.onGamePaused -= OnGamePausedHandler;
+        onEnergysufficiencyChange = null;
     }
 
 }
