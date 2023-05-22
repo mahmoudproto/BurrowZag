@@ -6,22 +6,12 @@ public class Hazard : MonoBehaviour
 {
     public UnityEngine.Events.UnityEvent onShatter;
     public UnityEngine.Events.UnityEvent onInitialize;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void Initialize()
     {
         onInitialize?.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public bool Shatter()
     {
         bool penetrated = EnergyControler.Instance ? EnergyControler.Instance.Penetrate() : false;
@@ -33,6 +23,7 @@ public class Hazard : MonoBehaviour
         }
         return penetrated;
     }
+
     private void OnEnable()
     {
         Initialize();

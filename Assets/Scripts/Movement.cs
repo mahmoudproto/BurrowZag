@@ -89,14 +89,6 @@ public class Movement : MonoBehaviour
         currentSpeed = normalSpeed;
     }
 
-    private void OnDestroy()
-    {
-        InputController.onDirectionChange -= ChangeDirection;
-        InputController.onMouseDown -= DeactivateEnergyBoost;
-        InputController.onDoubleTap -= ActivateEnergyBoost;
-        EnergyControler.onEnergysufficiencyChange -= onInsufficantEnergyHandler;
-    }
-
     IEnumerator SlowMo(float startSpeed,  float targetSpeed, float step)
     {
         for (float i = startSpeed, astep=step; i <= targetSpeed; astep=astep+astep, i += astep)
