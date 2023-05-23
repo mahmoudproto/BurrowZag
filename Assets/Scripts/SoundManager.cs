@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
         set {
             sfxVolume = value;
             sfxAudioSource.volume = sfxVolume;
+            Settings.SfxLevel = sfxVolume;
         } }
     public float MusicVolume {
         get => musicVolume;
@@ -37,6 +38,7 @@ public class SoundManager : MonoBehaviour
         {
             musicVolume = value;
             audioSource.volume = musicVolume;
+            Settings.AudioLevel = musicVolume;
         }
     }
 
@@ -50,6 +52,8 @@ public class SoundManager : MonoBehaviour
         }
         else
             instance = this;
+        Settings.Load();
+
         if (separateSfxMusicSources)
         {
             sfxAudioSource = new GameObject("SfxAudioSource").AddComponent<AudioSource>();
@@ -63,6 +67,8 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         PlayBackground();
+        sfxVolume = Settings.SfxLevel;
+        musicVolume = Settings.AudioLevel;
 
     }
 

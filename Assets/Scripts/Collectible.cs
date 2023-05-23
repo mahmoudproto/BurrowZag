@@ -9,6 +9,7 @@ public class Collectible : MonoBehaviour
     [SerializeField] string characterTag;
 
     static int lastCollectibleIndex=0;
+    public UnityEngine.Events.UnityEvent<float> onCollictibleHit;
     public int MyIndex { get; set; }
     public float EnergyToAdd 
     {
@@ -20,7 +21,6 @@ public class Collectible : MonoBehaviour
     {
         onCollictibleHit.AddListener(GameManager.instance.Fire_EnergyPack_Hit_event);
     }
-    public UnityEngine.Events.UnityEvent<float> onCollictibleHit;
     // Start is called before the first frame update
     void OnHit()
     {
