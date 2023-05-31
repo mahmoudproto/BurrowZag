@@ -21,7 +21,7 @@ public class Collectible : MonoBehaviour
     {
         onCollictibleHit.AddListener(GameManager.instance.Fire_EnergyPack_Hit_event);
     }
-    // Start is called before the first frame update
+
     void OnHit()
     {
         onCollictibleHit?.Invoke(energyToAdd);
