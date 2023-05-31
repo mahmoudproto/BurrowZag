@@ -6,12 +6,14 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] float initialSpeed = 6;
+    public float InitialSpeed { get => initialSpeed;}
     [SerializeField] float energizedSpeed = 12;
 
     [SerializeField] AnimationCurve boostSpeedTransition;
     [SerializeField] float boostTransitionDuration;
 
     float currentSpeed;
+    public float CurrentSpeed { get => currentSpeed; }
     new Rigidbody2D rigidbody2D;
     Vector2 movementDirection=new Vector2(-1,-1);
     private int lastDiriction=1;
