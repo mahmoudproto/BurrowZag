@@ -25,15 +25,17 @@ public class CollisionDetection : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Hazards"))
-            this.GetComponent<SpriteRenderer>().color = Color.yellow;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Hazards"))
-            this.GetComponent<SpriteRenderer>().color = Color.white;
-    }
+    //near hit warning
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Hazards"))
+    //        this.GetComponent<SpriteRenderer>().color = Color.yellow;
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Hazards"))
+    //        this.GetComponent<SpriteRenderer>().color = Color.white;
+    //}
 
 }
