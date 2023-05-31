@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(ScoreandTimeCoroutine);
         Time.timeScale = 0;
     }
+
     public void ResumeGame()
     {
         if (gamePaused == false)
@@ -112,6 +113,8 @@ public class GameManager : MonoBehaviour
         onGamePaused = null;
         onGameResumed = null;
         onStageChangeEvent = null;
+        OnEnergyPackHit = null;
+        OnNewEnergyPackGenerated = null;
     }
 
 }
