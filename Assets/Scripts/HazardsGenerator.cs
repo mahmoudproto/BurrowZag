@@ -17,6 +17,7 @@ public class HazardsGenerator : MonoBehaviour
     private float TimePassedSenseLastHazard;
     private Coroutine IncrementTimerCoroutine;
     private int previous_randomHazardIndex = -1;
+    public static event System.Action onNewHazardGenerated;
 
     private void Start()
     {
@@ -55,8 +56,11 @@ public class HazardsGenerator : MonoBehaviour
             randomHazard = GameObject.Instantiate(newHazzard, Vector3.zero , Quaternion.identity, hazardsContainer.transform); ;
         Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position - new Vector3(0,extraHazardDistance);
         randomHazard.transform.position = hazardPosition;
-        currentRandomInterval = Random.Range(minInterval, maxInterval + 1);
-        randomHazard.GetComponentInChildren<CollectibleRandomizer>().Randomize();
+        currentRandomInterval = Random.Range(minInterval, maxInterval );
+        CollectibleRandomizer collectibleRandomizer = randomHazard.GetComponentInChildren<CollectibleRandomizer>();
+        if (collectibleRandomizer != null)
+            collectibleRandomizer.Randomize();
+        onNewHazardGenerated?.Invoke();
     }
 
     IEnumerator IncrementTimePassed()
@@ -75,7 +79,6 @@ public class HazardsGenerator : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.onGameResumed -= OnGameResumeHandler;
-        GameManager.onGamePaused -= OnGamePausedHandler;
+        onNewHazardGenerated = null;
     }
 }
