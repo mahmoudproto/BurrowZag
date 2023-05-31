@@ -6,7 +6,7 @@ using System;
 public class DoubleTapDetector : MonoBehaviour
 {
     float lastTap = 0;
-    float currentTap = 0;
+    //float currentTap = 0;
     float lastMouseDown = 0;
     float lastMouseUp = 0;
 
