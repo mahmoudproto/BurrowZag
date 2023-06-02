@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionDetection : MonoBehaviour
 {
+    public static event Action onPlayerHitHazard;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Hazards"))
@@ -19,6 +22,7 @@ public class CollisionDetection : MonoBehaviour
             }
             else
             {
+                onPlayerHitHazard?.Invoke();
                 GameManager.instance.PlayerHitHazard();
                 SoundManager.Instance.PlayBlockHit();
             }
@@ -37,5 +41,10 @@ public class CollisionDetection : MonoBehaviour
     //    if (collision.CompareTag("Hazards"))
     //        this.GetComponent<SpriteRenderer>().color = Color.white;
     //}
+
+    private void OnDestroy()
+    {
+        onPlayerHitHazard = null;
+    }
 
 }
