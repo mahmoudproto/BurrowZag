@@ -27,8 +27,8 @@ public static class Settings
     }
     public static void Load()
     {
-        audioLevel = PlayerPrefs.GetFloat("audioLevel", 100);
-        sfxLevel = PlayerPrefs.GetFloat("sfxLevel", 100);
+        audioLevel = PlayerPrefs.GetFloat("audioLevel");
+        sfxLevel = PlayerPrefs.GetFloat("sfxLevel");
 
     }
 
