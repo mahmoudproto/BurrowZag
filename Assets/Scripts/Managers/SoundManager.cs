@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip blockHit;
     [SerializeField] AudioClip collectable;
     [SerializeField] AudioClip boost;
+    [SerializeField] AudioClip diamondCollected;
 
     [Header("UI Sounds")]
     [SerializeField] AudioClip buttonClick;
@@ -69,7 +70,13 @@ public class SoundManager : MonoBehaviour
         PlayBackground();
         sfxVolume = Settings.SfxLevel;
         musicVolume = Settings.AudioLevel;
+        DiamondController.onPlayerHitDiamond += PlayDiamondCollectedSound;
 
+    }
+
+    private void PlayDiamondCollectedSound()
+    {
+        sfxAudioSource.PlayOneShot(diamondCollected, sfxVolume);
     }
 
     public void PlayBackground()
