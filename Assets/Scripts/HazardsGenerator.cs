@@ -52,9 +52,17 @@ public class HazardsGenerator : MonoBehaviour
             randomHazardIndex = Random.Range(0, hazardsBool.Count);
         previous_randomHazardIndex = randomHazardIndex;
         GameObject randomHazard = hazardsBool[randomHazardIndex];
+        Vector3 hazardPosition;
         if (testingNewHazzard)
-            randomHazard = GameObject.Instantiate(newHazzard, Vector3.zero , Quaternion.identity, hazardsContainer.transform); ;
-        Vector3 hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position - new Vector3(0,extraHazardDistance);
+        {
+            randomHazard = GameObject.Instantiate(newHazzard, Vector3.zero, Quaternion.identity, hazardsContainer.transform);
+            hazardPosition = GameManager.instance.playerTransform.position + newHazzard.transform.position
+                - new Vector3(0, extraHazardDistance);
+        }
+        // hazardsPrefaps[randomHazardIndex] is used to apply the original prefab distance not the instantiated object
+        else
+            hazardPosition = GameManager.instance.playerTransform.position + hazardsPrefaps[randomHazardIndex].transform.position
+                - new Vector3(0, extraHazardDistance);
         randomHazard.transform.position = hazardPosition;
         currentRandomInterval = Random.Range(minInterval, maxInterval );
         CollectibleRandomizer collectibleRandomizer = randomHazard.GetComponentInChildren<CollectibleRandomizer>();
