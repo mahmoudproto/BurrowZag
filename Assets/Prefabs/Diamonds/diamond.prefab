@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4416859650820396416}
   - component: {fileID: 5601126312322842059}
   - component: {fileID: 875392845527755410}
+  - component: {fileID: -8563560185373973318}
   m_Layer: 0
   m_Name: diamond
-  m_TagString: Untagged
+  m_TagString: Diamond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.42352945, g: 0.79215693, b: 0.96470594, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,6 +116,20 @@ PolygonCollider2D:
       - {x: -0.7384792, y: -0.0041838153}
       - {x: -0.0041838726, y: -0.42153767}
       - {x: 0.7008247, y: 0.0041838195}
+--- !u!114 &-8563560185373973318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4849363180326286556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa8e20635900444bbffe3a1d63d344f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleSystem: {fileID: 5193696341370833098}
+  SpriteRenderer: {fileID: 5601126312322842059}
 --- !u!1 &8249026836326019270
 GameObject:
   m_ObjectHideFlags: 0
