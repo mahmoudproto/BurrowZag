@@ -25,12 +25,12 @@ public class Movement : MonoBehaviour
         GameManager.instance.playerTransform = this.transform;
         normalSpeed = initialSpeed;
         currentSpeed = normalSpeed;
-        InputController.onDirectionChange += ChangeDirection;
-        InputController.onMouseDown += DeactivateEnergyBoost;
+        InputManager.onDirectionChange += ChangeDirection;
+        InputManager.onMouseDown += DeactivateEnergyBoost;
         //InputController.onMouseUp += OnMouseUpHandler;
         EnergyControler.onEnergysufficiencyChange += onInsufficantEnergyHandler;
         GameManager.onStageChangeEvent += OnStageChangeHandler;
-        InputController.onDoubleTap += ActivateEnergyBoost;
+        InputManager.onStartDive += ActivateEnergyBoost;
     }
 
     void Update()
@@ -79,7 +79,7 @@ public class Movement : MonoBehaviour
     
     private void onInsufficantEnergyHandler(bool isSufficent)
     {
-        Debug.Log("energy sufficiency changed " +isSufficent);
+        Debug.Log("energy sufficiency changed to " +isSufficent);
         this.isEnergySufficent = isSufficent;
         if (isEnergySufficent == false)
             DeactivateEnergyBoost();

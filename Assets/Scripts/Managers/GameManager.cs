@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void intialzeNewRun()
     {
+        InputManager.controlScheme = PlayerPrefs.GetString("controlScheme");
         StartStagesCoroutines();
         ResumeGame();
     }
@@ -61,6 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (gamePaused == true)
+            return;
         gamePaused = true;
         onGamePaused?.Invoke();
         StopCoroutine(ScoreandTimeCoroutine);

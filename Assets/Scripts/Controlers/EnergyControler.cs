@@ -35,8 +35,8 @@ public class EnergyControler : MonoBehaviour
         instance = this;
         EnergySlider.maxValue = max_energy;
         EnergySlider.value = current_energy;
-        InputController.onDoubleTap += DecreaseEnergy;
-        InputController.onMouseDown += OnHoldHandler;
+        InputManager.onStartDive += DecreaseEnergy;
+        InputManager.onMouseDown += OnHoldHandler;
         GameManager.onGamePaused += OnGamePausedHandler;
         GameManager.onGameResumed += OnGameResumedHandler;
     }

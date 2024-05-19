@@ -18,6 +18,12 @@ public class UIManager : MonoBehaviour
         DiamondController.onPlayerHitDiamond += IncreeseDiamonds;
     }
 
+    public void ChangeControlScheme(string controlScheme)
+    {
+        PlayerPrefs.SetString("controlScheme", controlScheme);
+        InputManager.controlScheme = controlScheme;
+    }
+
     private void IncreeseDiamonds()
     {
         gems ++;
